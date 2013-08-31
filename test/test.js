@@ -10,6 +10,8 @@ var md5check = require('./util/md5check');
 var async = require('async');
 var rimraf = require('rimraf');
 var server = require('./util/server');
+var path = require('path');
+var fs = require('fs');
 
 // http server settings
 var httpServerPort = 8080;
@@ -20,6 +22,23 @@ var file1Md5 = '30b20f64db5d79df9fbc6e1f6b745e30';
 var file2Url = 'http://localhost:' + httpServerPort + '/pic.jpg';
 var file2Md5 = 'fc36541ba12333ac53dc3b616b77fa33';
 
+// ------------------------------------------------------------------------------------
+
+var clearTmpDir = function (done) {
+    var tmpFolder = path.join(__dirname, 'tmp');
+
+    rimraf(tmpFolder, function (err) {
+        if (err) {
+            return done(err);
+        }
+
+        fs.mkdir(tmpFolder, function (err) {
+            done(err);
+        });
+        
+    });
+};
+
 // ------------------------------------------------------------------------------------------
 
 describe('download', function () {
@@ -29,7 +48,7 @@ describe('download', function () {
         done();
     });
 
-    after(clearTmpDir);
+    // after(clearTmpDir);
     beforeEach(clearTmpDir);
 
     it('files option should work with a single file', function (done) {
@@ -100,10 +119,3 @@ describe('download', function () {
     });
 });
 
-// ------------------------------------------------------------------------------------
-
-var clearTmpDir = function (done) {
-    rimraf('./tmp/', function (err) {
-        done(err);
-    });
-};
