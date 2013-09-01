@@ -39,20 +39,13 @@ module.exports = function (task) {
             downloads[url] = downloader(url, opts.files[url], stats, ctx);
         }
 
-        parallel(downloads, opts.concurrency, function (err, results) {
-            ctx.log.debugln('Parallel results:', results);
+        parallel(downloads, opts.concurrency, function (err) {
+            ctx.log.debugln('Completed all downloads');
 
             next(err);
         });
     }, {
         description: 'Download {{totalFiles}} files'
-    })
-
-    .teardown(function (opts, ctx, next) {
-        // Code always executed after the execution of all "do" statements
-        // or after the task failed
-        // Useful to do any cleanup
-        next();
     });
 };
 
