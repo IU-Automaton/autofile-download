@@ -1,5 +1,5 @@
 {
-  "name": "automaton-download",
+  "name": "autofile-download",
   "version": "0.0.0",
   "description": "Task that downloads files",
   "main": "autofile.js",
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "autofile",
+    "automaton",
     "download",
     "get",
     "fetch",
