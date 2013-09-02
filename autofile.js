@@ -65,7 +65,7 @@ function downloader(url, dest, stats, ctx) {
                 stats.accountedForTotal[url] = true;
             }
 
-            ctx.log.infoln(url, state.percent);
+            ctx.log.infoln(url, state.percent + '%');
         })
         .on('error', function (err) {
             // TODO: maybe give option to fail silently individual files?
